@@ -26,6 +26,7 @@ describe("Block", () => {
   });
 
   describe("mine()", () => {
+    console.log();
     const mineBlock = Block.mineBlock(GENISIS_BLOCK, "mine");
     it("returns block", () => {
       expect(mineBlock instanceof Block).toBe(true);
