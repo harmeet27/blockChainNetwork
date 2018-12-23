@@ -10,6 +10,9 @@ class Block {
   }
 
   static genisis() {
+    // if (!genBlock) {
+    //   genBlock == new this(GENISIS_BLOCK);
+    // }
     return new this(GENISIS_BLOCK);
   }
 

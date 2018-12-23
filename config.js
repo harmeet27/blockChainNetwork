@@ -1,7 +1,11 @@
+const crypto = require("./crypto-hash");
+
+const timeStamp = 1;
+const lastHash = "-----";
 const GENISIS_BLOCK = {
-  timeStamp: 1,
-  lastHash: "------",
-  hash: "hash-one",
+  timeStamp: timeStamp,
+  lastHash: lastHash,
+  hash: crypto(timeStamp, lastHash),
   data: []
 };
 
