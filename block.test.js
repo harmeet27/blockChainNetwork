@@ -1,22 +1,39 @@
 const Block = require("./block");
-const { GENISIS_BLOCK } = require("./config");
+const { GENISIS_BLOCK, Mine_Rate } = require("./config");
 const crypto = require("./crypto-hash");
 
 describe("Block", () => {
-  const timeStamp = "date";
+  const timeStamp = 2000;
   const lastHash = "lasthash";
   const hash = "presenthash";
   const data = ["blockchain", "data"];
   const nonce = 1;
   const difficulty = 1;
-  const block = new Block({
-    timeStamp,
-    lastHash,
-    hash,
-    data,
-    nonce,
-    difficulty
+  let block = "";
+  beforeEach(() => {
+    block = new Block({
+      timeStamp,
+      lastHash,
+      hash,
+      data,
+      nonce,
+      difficulty
+    });
   });
+  //   const timeStamp = 2000;
+  //   const lastHash = "lasthash";
+  //   const hash = "presenthash";
+  //   const data = ["blockchain", "data"];
+  //   const nonce = 1;
+  //   const difficulty = 1;
+  //   const block = new Block({
+  //     timeStamp,
+  //     lastHash,
+  //     hash,
+  //     data,
+  //     nonce,
+  //     difficulty
+  //   });
 
   it("has all props", () => {
     expect(block.timeStamp).toEqual(timeStamp);
@@ -63,6 +80,25 @@ describe("Block", () => {
       expect(mineBlock.hash.substring(0, mineBlock.difficulty)).toEqual(
         "0".repeat(mineBlock.difficulty)
       );
+    });
+  });
+
+  describe("adjustDifficulty", () => {
+    it("devreases difficulty level when block is mined to slow", () => {
+      expect(
+        Block.arrangeDifficulty({
+          originalBlock: block,
+          timeStamp: timeStamp + Mine_Rate - 100
+        })
+      ).toEqual(block.difficulty + 1);
+    });
+    it("raises difficulty level when block is mined to fast", () => {
+      expect(
+        Block.arrangeDifficulty({
+          originalBlock: block,
+          timeStamp: timeStamp + Mine_Rate + 100
+        })
+      ).toEqual(block.difficulty - 1);
     });
   });
 });

@@ -1,4 +1,4 @@
-const { GENISIS_BLOCK } = require("./config");
+const { GENISIS_BLOCK, Mine_Rate } = require("./config");
 const crypto = require("./crypto-hash");
 
 class Block {
@@ -37,6 +37,14 @@ class Block {
       difficulty
     });
     return blc;
+  }
+
+  static arrangeDifficulty({ originalBlock, timeStamp }) {
+    const { difficulty } = originalBlock;
+    if (timeStamp - originalBlock.timeStamp > Mine_Rate) {
+      return difficulty - 1;
+    }
+    return difficulty + 1;
   }
 }
 
