@@ -22,9 +22,9 @@ class Blockchain {
 
     for (let i = 1; i < blockchainArray.length; i++) {
       const block = blockchainArray[i];
-      const { timeStamp, lastHash, hash, data } = block;
+      const { timeStamp, lastHash, hash, data, nonce, difficulty } = block;
       const prevBlock = blockchainArray[i - 1];
-      if (hash !== crypto(timeStamp, lastHash, data)) {
+      if (hash !== crypto(timeStamp, lastHash, data, nonce, difficulty)) {
         return false;
       }
       if (prevBlock.hash !== lastHash) {

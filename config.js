@@ -6,7 +6,9 @@ const GENISIS_BLOCK = {
   timeStamp: timeStamp,
   lastHash: lastHash,
   hash: crypto(timeStamp, lastHash),
-  data: []
+  data: [],
+  nonce: 0,
+  difficulty: 2
 };
 
 module.exports = { GENISIS_BLOCK };
