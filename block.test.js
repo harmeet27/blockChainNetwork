@@ -81,6 +81,11 @@ describe("Block", () => {
         "0".repeat(mineBlock.difficulty)
       );
     });
+
+    it("adjust the difficulty", () => {
+      const pResults = [lastBlock.difficulty + 1, lastBlock.difficulty - 1];
+      expect(pResults.includes(mineBlock.difficulty)).toBe(true);
+    });
   });
 
   describe("adjustDifficulty", () => {
@@ -99,6 +104,10 @@ describe("Block", () => {
           timeStamp: timeStamp + Mine_Rate + 100
         })
       ).toEqual(block.difficulty - 1);
+    });
+    it("has a lower limit of 1", () => {
+      block.difficulty = -1;
+      expect(Block.arrangeDifficulty({ originalBlock: block })).toEqual(1);
     });
   });
 });
