@@ -1,3 +1,4 @@
+const hashToBinary = require("hex-to-binary");
 const { GENISIS_BLOCK, Mine_Rate } = require("./config");
 const crypto = require("./crypto-hash");
 
@@ -22,7 +23,9 @@ class Block {
     const lastHash = lastBlock.hash;
     let hash = crypto(timeStamp, lastHash, data, nonce, difficulty);
 
-    while (hash.substring(0, difficulty) !== "0".repeat(difficulty)) {
+    while (
+      hashToBinary(hash).substring(0, difficulty) !== "0".repeat(difficulty)
+    ) {
       timeStamp = Date.now();
       difficulty = Block.arrangeDifficulty({
         originalBlock: lastBlock,

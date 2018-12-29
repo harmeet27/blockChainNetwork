@@ -22,6 +22,7 @@ class Blockchain {
 
     for (let i = 1; i < blockchainArray.length; i++) {
       const block = blockchainArray[i];
+      const lastDifficulty = blockchainArray[i - 1].difficulty;
       const { timeStamp, lastHash, hash, data, nonce, difficulty } = block;
       const prevBlock = blockchainArray[i - 1];
       if (hash !== crypto(timeStamp, lastHash, data, nonce, difficulty)) {
@@ -30,6 +31,8 @@ class Blockchain {
       if (prevBlock.hash !== lastHash) {
         return false;
       }
+
+      if (Math.abs(lastDifficulty - difficulty) > 1) return false;
     }
 
     return true;

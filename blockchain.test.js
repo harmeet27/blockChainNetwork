@@ -1,3 +1,4 @@
+const crypto = require("./crypto-hash");
 const Blockchain = require("./blockchain");
 const Block = require("./block");
 
@@ -61,6 +62,30 @@ describe("blockchain class functionality test", () => {
 
       it("return true for correct chain1", () => {
         blockChain.blockchainArray[0].hash = "fdgshj";
+        expect(blockChain.validateChain(blockChain.blockchainArray)).toBe(
+          false
+        );
+      });
+
+      it("return false in case the chain contains a block with jumped difficulty", () => {
+        const lastBlock =
+          blockChain.blockchainArray[blockChain.blockchainArray.length - 1];
+        const lastHash = lastBlock.hash;
+        const timeStamp = Date.now();
+        const nonce = 0;
+        const data = [];
+        const difficulty = lastBlock.difficulty - 3;
+
+        const hash = crypto(timeStamp, lastHash, difficulty, nonce, data);
+        const badBlock = new Block({
+          timeStamp,
+          lastHash,
+          hash,
+          nonce,
+          difficulty,
+          data
+        });
+        blockChain.blockchainArray.push(badBlock);
         expect(blockChain.validateChain(blockChain.blockchainArray)).toBe(
           false
         );
