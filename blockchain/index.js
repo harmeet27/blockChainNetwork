@@ -1,4 +1,4 @@
-const crypto = require("./crypto-hash");
+const crypto = require("../util/crypto-hash");
 const Block = require("./block");
 class Blockchain {
   constructor() {
@@ -40,12 +40,18 @@ class Blockchain {
 
   replaceChain(newChain) {
     if (newChain.length <= this.blockchainArray.length) {
+      console.log(
+        "Not replaced:",
+        "new chain length is not longer than original chain"
+      );
       return;
     }
     if (!this.validateChain(newChain)) {
+      console.log("Not replaced:", "invalid Chain");
       return;
     }
-    this.blockchainArray = chain;
+    this.blockchainArray = newChain;
+    console.log("replaced Chain:", this.blockchainArray);
   }
 }
 

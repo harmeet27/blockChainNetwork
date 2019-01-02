@@ -1,5 +1,5 @@
-const crypto = require("./crypto-hash");
-const Blockchain = require("./blockchain");
+const crypto = require("../util/crypto-hash");
+const Blockchain = require(".");
 const Block = require("./block");
 
 describe("blockchain class functionality test", () => {

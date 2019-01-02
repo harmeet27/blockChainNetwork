@@ -1,4 +1,4 @@
-const crypto = require("./crypto-hash");
+const crypto = require("./util/crypto-hash");
 
 const timeStamp = 1;
 const lastHash = "-----";

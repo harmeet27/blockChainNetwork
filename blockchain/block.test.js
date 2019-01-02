@@ -1,7 +1,7 @@
 const hexToBinary = require("hex-to-binary");
 const Block = require("./block");
-const { GENISIS_BLOCK, Mine_Rate } = require("./config");
-const crypto = require("./crypto-hash");
+const { GENISIS_BLOCK, Mine_Rate } = require("../config");
+const crypto = require("../util/crypto-hash");
 
 describe("Block", () => {
   const timeStamp = 2000;
@@ -85,6 +85,8 @@ describe("Block", () => {
 
     it("adjust the difficulty", () => {
       const pResults = [lastBlock.difficulty + 1, lastBlock.difficulty - 1];
+      console.log(pResults);
+      console.log(mineBlock.difficulty);
       expect(pResults.includes(mineBlock.difficulty)).toBe(true);
     });
   });
