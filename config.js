@@ -12,5 +12,5 @@ const GENISIS_BLOCK = {
   nonce: 0,
   difficulty: defaultDfficulty
 };
-
-module.exports = { GENISIS_BLOCK, Mine_Rate };
+const STARTING_BALANCE = 1000;
+module.exports = { GENISIS_BLOCK, Mine_Rate, STARTING_BALANCE };
