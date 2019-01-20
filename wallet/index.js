@@ -1,4 +1,4 @@
-const STARTING_BALANCE = require("../config.js");
+const { STARTING_BALANCE } = require("../config.js");
 const { ec } = require("../util");
 const crypto = require("../util/crypto-hash");
 
