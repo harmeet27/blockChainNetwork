@@ -8,7 +8,7 @@
     "start": "node index.js",
     "dev": "npm run start-redis && nodemon index.js",
     "dev-peer": "cross-env GENERATE_PEER_PORT='true' nodemon index.js",
-    "start-redis": "redis-server --daemonize yes"
+    "start-redis": "redis-server.exe --service-start"
   },
   "jest": {
     "testEnvironment": "node"
